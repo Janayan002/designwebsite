@@ -470,10 +470,10 @@ footer .wrap { display: flex; justify-content: space-between; gap: 12px; padding
       <div class="cs-main">
         <header class="cs-head" id="cs-overview">
           <h2>Tack</h2>
-          <p class="cs-sub">A canvas for visual research where every image remembers where it came from</p>
-          <p class="cs-sum">I designed and built Tack to replace a research process of 50+ open tabs, copied images and separately pasted links. You search the web from a panel beside your board, drop images, links and notes onto the canvas, and Tack keeps the source and date of every image automatically.</p>
+          <p class="cs-sub">A visual research canvas that keeps every image connected to its source</p>
+          <p class="cs-sum">Tack is a web app for visual research. Users search the web from a panel beside the board, collect images, links and notes on a canvas, and Tack records each image’s source and capture date automatically. I designed and built it after my own research process outgrew more than 50 open tabs and a separate list of links.</p>
           <dl class="cs-meta">
-            <div><dt>Role</dt><dd>Design and development, solo</dd></div>
+            <div><dt>Role</dt><dd>Product design and development (solo)</dd></div>
             <div><dt>Year</dt><dd>2026</dd></div>
             <!-- <div><dt>Timeline</dt><dd>8 weeks</dd></div> -->
             <div><dt>Tools</dt><dd>Figma, Next.js, Vercel, Claude API</dd></div>
@@ -486,19 +486,19 @@ footer .wrap { display: flex; justify-content: space-between; gap: 12px; padding
         <div class="cs-rows">
           <section class="cs-row">
             <h3>Challenge</h3>
-            <div><p>When research is visual, an image and its source end up in two different places: the image on a board, the link in a browser tab. Only memory connects them, and closing one tab can break a citation for good.</p></div>
+            <div><p>Visual research splits every reference in two: the image goes onto a board, while its source stays in a browser tab. Nothing links the two, so a single closed tab can cost a citation.</p></div>
           </section>
           <section class="cs-row">
             <h3>Solution</h3>
             <div>
-              <p>A board where the source travels with the image. Search sits beside the canvas, and everything you add keeps where and when you found it.</p>
-              <p>Boards save in the browser from the first visit; signing in moves them to an account. A browser extension and an AI research assistant extend the same workflow.</p>
+              <p>A research board where the source travels with the image. Search sits beside the canvas, and every item records where and when it was found.</p>
+              <p>Boards save in the browser from the first visit, and signing in moves them to an account. A browser extension and an AI research assistant extend the same workflow beyond the app.</p>
             </div>
           </section>
           <section class="cs-row">
             <h3>Constraints</h3>
             <div>
-              <p>I built Tack alone, so two technical limits shaped the design as much as user needs did. <strong>AI cost:</strong> every call costs money, so AI is an optional layer on top of the core workflow, not the core itself. <strong>Storage:</strong> images take up space quickly, so boards save in the browser first and accounts are for people who need their boards to last.</p>
+              <p>As a solo project, Tack was shaped by technical limits as much as by user needs. <strong>AI cost:</strong> every request has a real cost, so AI is an optional layer rather than the foundation of the product. <strong>Storage:</strong> images are heavy, so boards are stored in the browser by default, and accounts serve users who need long-term storage.</p>
               <!-- If API cost also pushed you toward search over AI-first, say it here. -->
             </div>
           </section>
@@ -510,82 +510,82 @@ footer .wrap { display: flex; justify-content: space-between; gap: 12px; padding
 
         <section class="cs-sec" id="cs-start">
           <h3>The starting point</h3>
-          <p>For an artist research assignment, I had to collect work by 10–20 artists who inspire me. By the end I had more than 50 tabs open, jumping between Instagram, portfolio sites and online journals. Collecting the images was easy. Keeping track of where each one came from was the tedious part.</p>
-          <p>My workflow used three tools, and each one failed in a different way:</p>
+          <p>The project began with an artist research assignment: collect work by 10–20 artists who influence my practice. By the end, I had more than 50 tabs open across Instagram, artist portfolios and online journals. Gathering images was straightforward. Tracking where each one came from was not.</p>
+          <p>My workflow spanned three tools, and each failed in a different way:</p>
           <table class="cs-table">
-            <thead><tr><th>Tool</th><th>How I used it</th><th>Where it broke</th></tr></thead>
+            <thead><tr><th>Tool</th><th>Role in my workflow</th><th>Where it failed</th></tr></thead>
             <tbody>
-              <tr><td>Figma</td><td data-label="Used for">Board for laying out images</td><td data-label="Broke">Copy each image from a tab, then copy its URL separately for the citation</td></tr>
-              <tr><td>Google Slides</td><td data-label="Used for">Presentation-style research deck</td><td data-label="Broke">Same double copy-paste; closing a tab by accident lost the link for good</td></tr>
-              <tr><td>Pinterest</td><td data-label="Used for">Saving references</td><td data-label="Broke">Only images already on Pinterest; if the uploader deletes a pin, the image is gone</td></tr>
+              <tr><td>Figma</td><td data-label="Role">Layout board</td><td data-label="Failed">Every image needed two copies: the image itself, then its URL for the citation</td></tr>
+              <tr><td>Google Slides</td><td data-label="Role">Research deck</td><td data-label="Failed">The same double copy-paste; closing a tab by mistake lost the source permanently</td></tr>
+              <tr><td>Pinterest</td><td data-label="Role">Reference library</td><td data-label="Failed">Limited to images already on Pinterest; if a pin is deleted, the image is lost</td></tr>
             </tbody>
           </table>
-          <p class="cs-quote">The real problem wasn’t layout. An image and its source were stored in two different places, and only my memory and my open tabs connected them.</p>
-          <p>Tack starts from the idea that the two should never be separated.</p>
+          <p class="cs-quote">The problem was never layout. Each image and its source lived in separate places, held together only by memory and open tabs.</p>
+          <p>Tack is built on a single principle: an image and its source should never be separated.</p>
         </section>
 
         <section class="cs-sec" id="cs-who">
           <h3>Who it’s for</h3>
-          <p>Tack started as a tool for myself, but the same problem shows up for anyone whose research is visual: art and design students, fashion, architecture, art history and marketing. Early conversations suggested the idea works beyond my own use:</p>
+          <p>Tack began as a personal tool, but the problem is shared by anyone whose research is visual, from art and design students to people working in fashion, architecture, art history and marketing. Informal conversations with peers suggested the concept extends well beyond my own use:</p>
           <table class="cs-table">
-            <thead><tr><th>Person</th><th>Field</th><th>What they’d use it for</th></tr></thead>
+            <thead><tr><th>Participant</th><th>Field</th><th>Intended use</th></tr></thead>
             <tbody>
-              <tr><td>Friend A</td><td data-label="Field">Fashion</td><td data-label="Use">Building mood boards</td></tr>
-              <tr><td>Friend B</td><td data-label="Field">Design</td><td data-label="Use">Collecting type and image inspiration</td></tr>
-              <tr><td>Friend C</td><td data-label="Field">Outside creative fields</td><td data-label="Use">Saving images for fun, like animation characters he likes</td></tr>
+              <tr><td>Participant 1</td><td data-label="Field">Fashion</td><td data-label="Use">Building mood boards</td></tr>
+              <tr><td>Participant 2</td><td data-label="Field">Design</td><td data-label="Use">Collecting typography and image references</td></tr>
+              <tr><td>Participant 3</td><td data-label="Field">Non-creative field</td><td data-label="Use">Personal collections, such as favorite animated characters</td></tr>
             </tbody>
           </table>
-          <p>The third response stood out: someone outside creative fields saw a use for it right away, which pointed to a broader audience than I had planned for.</p>
+          <p>The third response was the most telling. Someone with no creative background saw an immediate use for Tack, pointing to a wider audience than I had originally planned for.</p>
           <!-- Stronger with: one observed session of someone using the live site. -->
         </section>
 
         <section class="cs-sec" id="cs-decisions">
           <h3>Key decisions</h3>
-          <p>Four decisions shaped Tack. Each time I chose against the obvious default, which was usually “do what Figma does” or “let the AI do it.”</p>
+          <p>Four decisions defined the product. In each, I deliberately moved away from the obvious default, which was usually “do what Figma does” or “let the AI handle it.”</p>
           <ol class="cs-decisions">
             <li>
               <h4><span class="cs-no">01</span>Pages instead of layers</h4>
               <dl class="cs-dec">
-                <div><dt>Default</dt><dd>A Figma-style layers panel on the left.</dd></div>
-                <div><dt>Chose</dt><dd>Pages, with several visible on the same screen.</dd></div>
-                <div><dt>Why</dt><dd>Creatives find inspiration by spotting connections between different subjects. Layers organise one board; pages let you compare several research threads side by side.</dd></div>
+                <div><dt>Default</dt><dd>A Figma-style layers panel.</dd></div>
+                <div><dt>Decision</dt><dd>Pages, with several visible on one screen.</dd></div>
+                <div><dt>Rationale</dt><dd>Creative insight often comes from connecting unrelated subjects. Layers organize a single board; pages let users compare several research threads side by side.</dd></div>
               </dl>
               <div class="cs-panel" data-tabs>
-                <figure data-tab="v1 · Layers"><img src="tack/v1-layers.jpg" width="2000" height="1083" loading="lazy" alt="Early Tack: a layers panel on the left listing a single frame, an empty white board in the middle"><figcaption>The first version borrowed Figma’s layers panel: one frame, one board.</figcaption></figure>
-                <figure data-tab="Pages, one at a time"><img src="tack/v3-pages-list.jpg" width="2000" height="1089" loading="lazy" alt="Later version: a pages list on the left with Page 1 and Page 2, only one page shown on the canvas"><figcaption>Pages replaced layers, but you could only see one page at a time.</figcaption></figure>
-                <figure data-tab="Now · side by side"><img src="tack/tack.jpg" width="2000" height="1140" loading="lazy" alt="Current Tack: several pages of collected images visible on the same canvas"><figcaption>Now several pages sit on the same canvas, so research threads can be compared directly.</figcaption></figure>
+                <figure data-tab="v1 · Layers"><img src="tack/v1-layers.jpg" width="2000" height="1083" loading="lazy" alt="Early Tack: a layers panel on the left listing a single frame, an empty white board in the middle"><figcaption>The first version adopted Figma’s layers panel: one frame, one board.</figcaption></figure>
+                <figure data-tab="Pages, one at a time"><img src="tack/v3-pages-list.jpg" width="2000" height="1089" loading="lazy" alt="Later version: a pages list on the left with Page 1 and Page 2, only one page shown on the canvas"><figcaption>Pages replaced layers, but only one could be viewed at a time.</figcaption></figure>
+                <figure data-tab="Now · side by side"><img src="tack/tack.jpg" width="2000" height="1140" loading="lazy" alt="Current Tack: several pages of collected images visible on the same canvas"><figcaption>The current version places multiple pages on a single canvas for direct comparison.</figcaption></figure>
               </div>
             </li>
             <li>
-              <h4><span class="cs-no">02</span>Google-style search instead of an AI chat</h4>
+              <h4><span class="cs-no">02</span>Search-first, not AI-first</h4>
               <dl class="cs-dec">
-                <div><dt>Default</dt><dd>Ask an AI assistant and let it return results.</dd></div>
-                <div><dt>Chose</dt><dd>A familiar search panel beside the board. Links open in a preview next to the canvas, or in the browser.</dd></div>
-                <div><dt>Why</dt><dd>Search is more hands-on: you decide which sites to visit and where your images come from. For research that has to be cited, that control matters more than speed. The AI assistant supports search; it doesn’t replace it.</dd></div>
+                <div><dt>Default</dt><dd>An AI assistant that returns results on request.</dd></div>
+                <div><dt>Decision</dt><dd>A familiar, Google-style search panel beside the board, with links opening in an adjacent preview or in the browser.</dd></div>
+                <div><dt>Rationale</dt><dd>Search keeps users in control of which sources they visit and where their images come from. For research that must be cited, that control outweighs speed. AI supports the search rather than replacing it.</dd></div>
               </dl>
               <div class="cs-panel" data-tabs>
-                <figure data-tab="Before"><img src="tack/v1-ai-research.jpg" width="2000" height="1090" loading="lazy" alt="Early version: an AI Research panel where a typed prompt returns a list of artists to keep or skip, each turned into a generated card"><figcaption>Before: you typed a prompt and the AI returned a list of artists to keep or skip.</figcaption></figure>
-                <figure data-tab="After"><img src="tack/v3-pages-list.jpg" width="2000" height="1089" loading="lazy" alt="Search panel with Web, Images and AI research tabs and the hint: search like you would on Google"><figcaption>After: web search comes first, with images and AI research as separate tabs.</figcaption></figure>
+                <figure data-tab="Before"><img src="tack/v1-ai-research.jpg" width="2000" height="1090" loading="lazy" alt="Early version: an AI Research panel where a typed prompt returns a list of artists to keep or skip, each turned into a generated card"><figcaption>Before: the user entered a prompt, and the AI returned a list of artists to keep or skip.</figcaption></figure>
+                <figure data-tab="After"><img src="tack/v3-pages-list.jpg" width="2000" height="1089" loading="lazy" alt="Search panel with Web, Images and AI research tabs and the hint: search like you would on Google"><figcaption>After: web search leads, with image search and AI research as secondary tabs.</figcaption></figure>
               </div>
             </li>
             <li>
               <h4><span class="cs-no">03</span>A sketchbook, not a design tool</h4>
               <dl class="cs-dec">
-                <div><dt>Before</dt><dd>A dark-mode interface that looked like Figma.</dd></div>
-                <div><dt>Chose</dt><dd>A light white-and-beige “sketchbook” style with more varied icons.</dd></div>
-                <div><dt>Why</dt><dd>Artists research in sketchbooks, not in design software. A physical-tool feel makes Tack a place to think and collect, not a place to produce final work.</dd></div>
+                <div><dt>Default</dt><dd>A dark, Figma-like interface.</dd></div>
+                <div><dt>Decision</dt><dd>A light, white-and-beige sketchbook aesthetic with more expressive icons.</dd></div>
+                <div><dt>Rationale</dt><dd>Artists research in sketchbooks, not production software. A tactile, physical-tool feel positions Tack as a space for thinking and collecting rather than for producing final work.</dd></div>
               </dl>
               <div class="cs-panel" data-tabs>
-                <figure data-tab="Before"><img src="tack/v2-board-dark.jpg" width="2000" height="1082" loading="lazy" alt="Dark-mode version of the board with a dark canvas, pages list and search panel"><figcaption>Before: dark and close to Figma, which read as a place to produce final work.</figcaption></figure>
-                <figure data-tab="After"><img src="tack/tack.jpg" width="2000" height="1140" loading="lazy" alt="Current light, sketchbook-style Tack board"><figcaption>After: a light, sketchbook feel that reads as a place to collect and think.</figcaption></figure>
+                <figure data-tab="Before"><img src="tack/v2-board-dark.jpg" width="2000" height="1082" loading="lazy" alt="Dark-mode version of the board with a dark canvas, pages list and search panel"><figcaption>Before: a dark interface that read as a production tool.</figcaption></figure>
+                <figure data-tab="After"><img src="tack/tack.jpg" width="2000" height="1140" loading="lazy" alt="Current light, sketchbook-style Tack board"><figcaption>After: a lighter sketchbook aesthetic suited to collecting and reflection.</figcaption></figure>
               </div>
             </li>
             <li>
-              <h4><span class="cs-no">04</span>Save in the browser first, account optional</h4>
+              <h4><span class="cs-no">04</span>Local-first, account optional</h4>
               <dl class="cs-dec">
-                <div><dt>Default</dt><dd>Require sign-up before you can make a board.</dd></div>
-                <div><dt>Chose</dt><dd>Boards save in the browser right away; signing in moves them to an account.</dd></div>
-                <div><dt>Why</dt><dd>Someone doing a one-time project can start with no setup. People who come back have a reason to sign in.</dd></div>
+                <div><dt>Default</dt><dd>Sign-up required before creating a board.</dd></div>
+                <div><dt>Decision</dt><dd>Boards save in the browser immediately; signing in moves them to an account.</dd></div>
+                <div><dt>Rationale</dt><dd>Removing setup lets someone with a one-off project start right away, while returning users have a clear reason to create an account.</dd></div>
               </dl>
               <!-- Add a screenshot of the sign-in / "move boards to account" moment:
               <figure class="cs-panel"><img src="tack/signin.jpg" width="2000" height="1100" loading="lazy" alt="…"><figcaption>…</figcaption></figure> -->
@@ -595,16 +595,16 @@ footer .wrap { display: flex; justify-content: space-between; gap: 12px; padding
 
         <section class="cs-sec" id="cs-source">
           <h3>Deep dive: source tracking</h3>
-          <p>Every image on a Tack board keeps its source and the date it was found. It’s the feature that answers “why not just use Pinterest or Figma?”</p>
+          <p>Every image on a Tack board retains its source and capture date. This is the feature that sets Tack apart from Pinterest or Figma.</p>
 
           <h4>Problem</h4>
-          <p>In my old workflow, each image needed two copy-pastes: the image, then its URL. The link lived only in an open tab, so closing that tab could break the citation for good. On Pinterest, the image itself could disappear if the uploader deleted it.</p>
+          <p>In my previous workflow, every image required two copy-pastes: one for the image and one for its URL. The link existed only in an open tab, so closing it could break a citation permanently. On Pinterest, the image itself could disappear if the uploader removed it.</p>
 
-          <h4>Where sources are hard to keep</h4>
+          <h4>Edge cases</h4>
           <ul class="cs-bullets">
-            <li><strong>Image links that expire.</strong> Instagram and Facebook image links stop working after a few days, so for those sites the Tack Clipper extension saves a copy of the picture itself, not just the link.</li>
-            <li><strong>Pages where right-click fails.</strong> On Instagram, right-click doesn’t reach the picture. A Pick images mode lets you choose pictures straight from the page.</li>
-            <li><strong>Saving with no board open.</strong> Clipped items wait in a queue, and the extension icon shows how many, until a board is opened.</li>
+            <li><strong>Expiring image links.</strong> Instagram and Facebook image URLs expire after a few days, so for these sites the Tack Clipper extension stores a copy of the image rather than the link alone.</li>
+            <li><strong>Blocked right-click.</strong> Instagram prevents right-clicking on images, so a Pick Images mode lets users select images directly from the page.</li>
+            <li><strong>No open board.</strong> Clipped items are held in a queue, with a count shown on the extension icon, until a board is opened.</li>
           </ul>
           <!-- Still to answer:
                - What is recorded when an image has no clear source (e.g. a pasted screenshot)?
@@ -627,10 +627,10 @@ footer .wrap { display: flex; justify-content: space-between; gap: 12px; padding
 
         <section class="cs-sec" id="cs-process">
           <h3>Process</h3>
-          <p>Tack began as <em>Research Board</em>, a tool that opened on a frame-size picker and was built around searching with AI. Over the versions, the name, the colour scheme and the centre of the product all changed, from an AI that finds things for you to a board where you do the finding and Tack keeps track.</p>
+          <p>Tack began as <em>Research Board</em>, a tool that opened on a frame-size picker and centered on AI-driven search. Across successive versions, the name, the visual language and the core of the product all shifted: from an AI that finds material for the user to a board where the user leads the research and Tack keeps the record.</p>
           <div class="cs-panel" data-tabs>
-            <figure data-tab="v1 · Research Board"><img src="tack/v1-launch.jpg" width="2000" height="1083" loading="lazy" alt="First version, called Research Board: a start page with frame sizes to pick from and the line search with AI, keep what matters"><figcaption>v1: Research Board. “Search with AI, keep what matters, and lay it out on a canvas.”</figcaption></figure>
-            <figure data-tab="v2 · Dark"><img src="tack/v2-launch-dark.jpg" width="2000" height="1078" loading="lazy" alt="Dark version of the Research Board start page"><figcaption>v2: the same start page in the dark, Figma-like style.</figcaption></figure>
+            <figure data-tab="v1 · Research Board"><img src="tack/v1-launch.jpg" width="2000" height="1083" loading="lazy" alt="First version, called Research Board: a start page with frame sizes to pick from and the line search with AI, keep what matters"><figcaption>v1: Research Board, positioned around AI search (“Search with AI, keep what matters, and lay it out on a canvas”).</figcaption></figure>
+            <figure data-tab="v2 · Dark"><img src="tack/v2-launch-dark.jpg" width="2000" height="1078" loading="lazy" alt="Dark version of the Research Board start page"><figcaption>v2: the same start page in the dark, Figma-like interface.</figcaption></figure>
           </div>
           <!-- Workflow diagram, sketches or wireframes go here:
           <figure class="cs-panel"><img src="tack/workflow.jpg" width="2000" height="1200" loading="lazy" alt="…"><figcaption>…</figcaption></figure>
@@ -639,12 +639,12 @@ footer .wrap { display: flex; justify-content: space-between; gap: 12px; padding
 
         <section class="cs-sec" id="cs-outcome">
           <h3>Outcome and next steps</h3>
-          <p>Tack is live at <a class="u" href="https://tack-eta.vercel.app" target="_blank" rel="noopener">tack-eta.vercel.app</a>, with boards, folders, web search, source tracking, an AI assistant and a browser extension.</p>
+          <p>Tack is live at <a class="u" href="https://tack-eta.vercel.app" target="_blank" rel="noopener">tack-eta.vercel.app</a>, with boards, folders, web search, automatic source tracking, an AI research assistant and a browser extension.</p>
           <!-- Add one piece of evidence: time to collect and cite 10 images (old workflow vs Tack),
                a short test with 3–5 classmates, or one quote from someone who used it. -->
           <h4>Next</h4>
           <ul class="cs-bullets">
-            <li>A free tier plus a paid plan with an account.</li>
+            <li>Introduce a free tier alongside a paid plan with account features.</li>
             <!-- <li>What you'd change based on feedback so far.</li> -->
           </ul>
         </section>
