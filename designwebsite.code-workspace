@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../../satellite selected"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "designwebsite"
+	}
+}
