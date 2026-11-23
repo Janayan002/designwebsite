@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Tack · Jana Yan</title>
+<meta name="description" content="Tack case study: a visual research canvas where every image keeps its source and the day you found it.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Lato:ital,wght@0,400;0,700;1,400&family=Syne+Mono&display=swap">
+<link rel="stylesheet" href="../case.css">
+</head>
+<body>
+<!--
+  Tack case study. Layout and styles are shared with sortrat/ (../case.css).
+
+  STILL TO ADD (carried over from the old in-page case study, most important first):
+  [ ] Source tracking: alternatives considered, how it changed, trade-offs
+  [ ] One piece of evidence for the outcome (timing comparison, small test, or a quote)
+  [ ] 30–60 s screen recording of the main flow
+  [ ] Current screens: search panel, link preview, image with its citation, browser extension
+  [ ] Your workflow diagram, early sketches or wireframes
+  [ ] Timeline, and whether this was part of a class
+  [ ] Confirm role, and whether API cost shaped the search decision
+-->
+
+<header class="top" id="top">
+  <div class="wrap">
+    <a class="brand" href="../">Jana Yan</a>
+    <nav class="nav" aria-label="Sections"><a href="../#works">Works</a><a href="../#about">About</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+<div class="col">
+
+  <!-- ===== hero ===== -->
+  <section class="hero" aria-labelledby="t">
+    <h1 id="t">Tack is a visual research canvas where every image keeps its source and the day you found it</h1>
+    <figure class="panel" style="margin-bottom:0">
+      <img src="hero.jpg" width="2000" height="1125" alt="Tack board titled painting artist research: a page of collected images and notes on the canvas, with a live web page open in a panel beside it">
+    </figure>
+    <div class="meta">
+      <div><h2>Role</h2><ul><li>Product designer</li><li>Developer</li><li>Solo project</li></ul></div>
+      <div><h2>Scope</h2><ul><li>Problem framing</li><li>Product design</li><li>Web app</li><li>Browser extension</li></ul></div>
+      <div><h2>Tools</h2><ul><li>Figma</li><li>Next.js</li><li>Vercel</li><li>Claude API</li></ul></div>
+      <div><h2>Year</h2><ul><li>2026</li></ul><a class="live" href="https://tack-eta.vercel.app" target="_blank" rel="noopener">Visit live site ↗</a></div>
+    </div>
+  </section>
+
+  <!-- ===== problem / solution ===== -->
+  <section class="sec two" aria-label="Problem and solution">
+    <div>
+      <span class="k"><b>01</b>Problem</span>
+      <p class="lead">Visual research splits every reference in two: the image goes onto a board, while its source stays in a browser tab.</p>
+      <ul class="dots">
+        <li>Nothing links the image to where it came from</li>
+        <li>Every image needs two copy-pastes: the picture, then its URL</li>
+        <li>One closed tab can cost a citation for good</li>
+      </ul>
+    </div>
+    <div>
+      <span class="k"><b>02</b>Solution</span>
+      <p class="lead">A research board where the source travels with the image. Search sits beside the canvas, and every item records where and when it was found.</p>
+      <p>Boards save in the browser from the first visit, and signing in moves them to an account. A browser extension and an AI research assistant extend the same workflow beyond the app.</p>
+    </div>
+  </section>
+
+  <!-- ===== starting point ===== -->
+  <section class="sec" aria-labelledby="s-h">
+    <span class="k"><b>03</b>Starting point</span>
+    <h2 id="s-h">More than 50 tabs, and no idea where half the images came from</h2>
+    <p>The project began with an artist research assignment: collect work by 10–20 artists who influence my practice. By the end, I had more than 50 tabs open across Instagram, artist portfolios and online journals. Gathering images was straightforward. Tracking where each one came from was not.</p>
+    <p>My workflow spanned three tools, and each failed in a different way:</p>
+    <div class="panel pad grid3">
+      <div class="tool"><span class="k">layout board</span><h3>Figma</h3><p>Every image needed two copies: the image itself, then its URL for the citation.</p></div>
+      <div class="tool"><span class="k">research deck</span><h3>Google Slides</h3><p>The same double copy-paste. Closing a tab by mistake lost the source permanently.</p></div>
+      <div class="tool"><span class="k">reference library</span><h3>Pinterest</h3><p>Limited to images already on Pinterest. If a pin is deleted, the image is lost.</p></div>
+    </div>
+    <blockquote style="max-width:36ch">The problem was never layout. Each image and its source lived in separate places, held together only by memory and open tabs.</blockquote>
+    <p style="margin-top:22px">Tack is built on a single principle: <strong>an image and its source should never be separated.</strong></p>
+  </section>
+
+  <!-- ===== who ===== -->
+  <section class="sec split" aria-labelledby="w-h">
+    <div>
+      <span class="k"><b>04</b>Who it’s for</span>
+      <h3 id="w-h">Anyone whose research is visual</h3>
+      <p>Tack began as a personal tool, but the problem is shared by art and design students and by people in fashion, architecture, art history and marketing. Informal conversations with peers suggested the concept reaches well beyond my own use.</p>
+      <p>The third response was the most telling: someone with no creative background saw an immediate use for Tack, pointing to a wider audience than I had planned for.</p>
+    </div>
+    <div class="panel pad">
+      <ol class="flow" aria-label="Peer conversations">
+        <li style="--c:var(--t-pink)"><b>Fashion</b>Building mood boards</li>
+        <li style="--c:var(--t-blue)"><b>Design</b>Collecting typography and image references</li>
+        <li style="--c:var(--t-yellow)"><b>Non-creative field</b>Personal collections, such as favorite animated characters</li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ===== constraints ===== -->
+  <section class="sec" aria-labelledby="c-h">
+    <span class="k"><b>05</b>Constraints</span>
+    <h2 id="c-h">Shaped by technical limits as much as by user needs</h2>
+    <p>As a solo project, two limits set the shape of the product early on.</p>
+    <div class="panel pad grid2">
+      <div class="pr"><span class="k">01</span><h3>AI cost</h3><p>Every request has a real cost, so AI is an optional layer rather than the foundation of the product.</p></div>
+      <div class="pr"><span class="k">02</span><h3>Storage</h3><p>Images are heavy, so boards are stored in the browser by default, and accounts serve users who need long-term storage.</p></div>
+    </div>
+  </section>
+
+  <!-- ===== key decisions ===== -->
+  <section class="sec" aria-labelledby="d-h">
+    <span class="k"><b>06</b>Key decisions</span>
+    <h2 id="d-h">Four times I moved away from the obvious default</h2>
+    <p>The default was usually “do what Figma does” or “let the AI handle it.”</p>
+
+    <div class="iter">
+      <span class="k">decision 01</span>
+      <h3>Pages instead of layers</h3>
+      <dl class="dec"><div><dt>default</dt><dd>A Figma-style layers panel.</dd></div><div><dt>decision</dt><dd>Pages, with several visible on one screen.</dd></div></dl>
+      <p>Creative insight often comes from connecting unrelated subjects. Layers organize a single board; pages let you compare several research threads side by side.</p>
+      <div class="panel pad shots n3">
+        <figure><img src="v1-layers.jpg" width="2000" height="1083" loading="lazy" alt="Early Tack: a layers panel on the left listing a single frame, an empty white board in the middle"><figcaption>v1: one frame, one board, Figma’s layers panel.</figcaption></figure>
+        <figure><img src="v3-pages-list.jpg" width="2000" height="1089" loading="lazy" alt="Later version: a pages list on the left with Page 1 and Page 2, only one page shown on the canvas"><figcaption>Pages replaced layers, one at a time.</figcaption></figure>
+        <figure><img src="tack.jpg" width="2000" height="1140" loading="lazy" alt="Current Tack: several pages of collected images visible on the same canvas"><figcaption>Now: several pages side by side.</figcaption></figure>
+      </div>
+    </div>
+
+    <div class="iter">
+      <span class="k">decision 02</span>
+      <h3>Search-first, not AI-first</h3>
+      <dl class="dec"><div><dt>default</dt><dd>An AI assistant that returns results on request.</dd></div><div><dt>decision</dt><dd>A familiar, Google-style search panel beside the board, with links opening in a preview or in the browser.</dd></div></dl>
+      <p>Search keeps you in control of which sources you visit and where your images come from. For research that must be cited, that control outweighs speed. AI supports the search rather than replacing it.</p>
+      <div class="panel pad shots n2">
+        <figure><img src="v1-ai-research.jpg" width="2000" height="1090" loading="lazy" alt="Early version: an AI Research panel where a typed prompt returns a list of artists to keep or skip, each turned into a generated card"><figcaption>Before: a prompt returns a list of artists to keep or skip.</figcaption></figure>
+        <figure><img src="v3-pages-list.jpg" width="2000" height="1089" loading="lazy" alt="Search panel with Web, Images and AI research tabs and the hint: search like you would on Google"><figcaption>After: web search leads; images and AI research are secondary tabs.</figcaption></figure>
+      </div>
+    </div>
+
+    <div class="iter">
+      <span class="k">decision 03</span>
+      <h3>A sketchbook, not a design tool</h3>
+      <dl class="dec"><div><dt>default</dt><dd>A dark, Figma-like interface.</dd></div><div><dt>decision</dt><dd>A light, white-and-beige sketchbook look with more expressive icons.</dd></div></dl>
+      <p>Artists research in sketchbooks, not production software. A tactile, physical-tool feel makes Tack a space for thinking and collecting rather than for producing final work.</p>
+      <div class="panel pad shots n2">
+        <figure><img src="v2-board-dark.jpg" width="2000" height="1082" loading="lazy" alt="Dark-mode version of the board with a dark canvas, pages list and search panel"><figcaption>Before: a dark interface that read as a production tool.</figcaption></figure>
+        <figure><img src="tack.jpg" width="2000" height="1140" loading="lazy" alt="Current light, sketchbook-style Tack board"><figcaption>After: a lighter sketchbook feel for collecting and reflection.</figcaption></figure>
+      </div>
+    </div>
+
+    <div class="iter">
+      <span class="k">decision 04</span>
+      <h3>Local-first, account optional</h3>
+      <dl class="dec"><div><dt>default</dt><dd>Sign up before creating a board.</dd></div><div><dt>decision</dt><dd>Boards save in the browser immediately; signing in moves them to an account.</dd></div></dl>
+      <p>Removing setup lets someone with a one-off project start right away, while returning users have a clear reason to create an account.</p>
+    </div>
+  </section>
+
+  <!-- ===== source tracking ===== -->
+  <section class="sec split" aria-labelledby="src-h">
+    <div>
+      <span class="k"><b>07</b>Deep dive</span>
+      <h3 id="src-h">Source tracking</h3>
+      <p>Every image on a Tack board keeps its source and capture date. This is what sets Tack apart from Pinterest or Figma.</p>
+      <p>In my old workflow, the link existed only in an open tab, so closing it could break a citation permanently. On Pinterest, the image itself could disappear if the uploader removed it.</p>
+    </div>
+    <div class="panel pad demo" aria-label="Example of an image card with its source">
+      <div class="cite">
+        <span class="sw" aria-hidden="true"></span>
+        <div><small>on your board</small><strong>Steel-rod dishes, gallery view</strong><code>jana-yan.com/installation</code><em>found Nov 12, 2026</em></div>
+      </div>
+      <div class="arrow" aria-hidden="true">↓ later, the tab is long closed</div>
+      <div class="dest" style="background:var(--t-green)"><small style="color:#3F6B35">the citation is still there</small><span>Source + date travel with the image</span></div>
+    </div>
+  </section>
+
+  <section class="sec" aria-labelledby="e-h" style="margin-top:56px">
+    <span class="k">edge cases</span>
+    <h3 id="e-h">Where the web fights back</h3>
+    <div class="panel pad grid3">
+      <div class="pr"><span class="k">F1</span><h3>Expiring image links</h3><p>Instagram and Facebook image URLs expire after a few days, so for these sites the Tack Clipper extension stores a copy of the image, not just the link.</p></div>
+      <div class="pr"><span class="k">F2</span><h3>Blocked right-click</h3><p>Instagram blocks right-clicking on images, so a Pick Images mode lets you select images straight from the page.</p></div>
+      <div class="pr"><span class="k">F3</span><h3>No open board</h3><p>Clipped items wait in a queue, with a count on the extension icon, until you open a board.</p></div>
+    </div>
+  </section>
+
+  <!-- ===== process ===== -->
+  <section class="sec" aria-labelledby="pr-h">
+    <span class="k"><b>08</b>Process</span>
+    <h2 id="pr-h">From Research Board to Tack</h2>
+    <p>Tack began as <em>Research Board</em>, a tool that opened on a frame-size picker and centered on AI-driven search. Across versions, the name, the visual language and the core of the product all shifted: from an AI that finds material for you to a board where you lead the research and Tack keeps the record.</p>
+
+    <div class="iter">
+      <span class="k">version 1</span>
+      <h3>Research Board</h3>
+      <p>Positioned around AI search: “Search with AI, keep what matters, and lay it out on a canvas.”</p>
+      <figure class="panel pad"><img src="v1-launch.jpg" width="2000" height="1083" loading="lazy" alt="First version, called Research Board: a start page with frame sizes to pick from and the line search with AI, keep what matters" class="framed"></figure>
+    </div>
+    <div class="iter">
+      <span class="k">version 2</span>
+      <h3>Dark mode</h3>
+      <p>The same start page in a dark, Figma-like interface, before the move to a sketchbook feel.</p>
+      <figure class="panel pad"><img src="v2-launch-dark.jpg" width="2000" height="1078" loading="lazy" alt="Dark version of the Research Board start page" class="framed"></figure>
+    </div>
+    <div class="iter">
+      <span class="k">version 3 · live</span>
+      <h3>Tack</h3>
+      <p>A light board with pages side by side, search beside the canvas and a source on every image.</p>
+      <figure class="panel pad"><img src="tack.jpg" width="2000" height="1140" loading="lazy" alt="Current Tack board with pages of images side by side and a live web page open in the side panel" class="framed"></figure>
+    </div>
+  </section>
+
+  <!-- ===== outcome ===== -->
+  <section class="sec" aria-labelledby="o-h">
+    <span class="k"><b>09</b>Outcome</span>
+    <h2 id="o-h">Live, and what’s next</h2>
+    <div class="two" style="margin-top:32px">
+      <div><h3>Shipped</h3><p>Tack is live at <a href="https://tack-eta.vercel.app" target="_blank" rel="noopener">tack-eta.vercel.app</a>, with boards, folders, web search, automatic source tracking, an AI research assistant and a browser extension.</p></div>
+      <div><h3>Next</h3><p>Introduce a free tier alongside a paid plan with account features.</p></div>
+    </div>
+  </section>
+
+  <section class="end" aria-label="Try Tack">
+    <h2>Try Tack, or ask me about it</h2>
+    <p>This page is a snapshot of the process. I’m happy to walk through the whole thing.</p>
+    <a class="btn" href="https://tack-eta.vercel.app" target="_blank" rel="noopener">Visit live site <span aria-hidden="true">↗</span></a>
+    <a class="btn ghost" href="mailto:yanjana002@gmail.com">Email me</a>
+  </section>
+
+  <a class="back" href="../#works">← all works</a>
+
+</div>
+</main>
+
+<footer>
+  <div class="wrap"><span>© 2026 Jana Yan</span><a href="#top">back to top ↑</a></div>
+</footer>
+
+</body>
+</html>
