@@ -1,0 +1,528 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Gallery Guide · prototype</title>
+<meta name="description" content="Clickable prototype of Gallery Guide, a phone guide for the WashU Sam Fox School Gallery.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500&family=Roboto+Mono:ital,wght@0,400;0,700;1,400&display=swap">
+<style>
+/* Gallery Guide prototype. One page, views swapped by a small router (see script).
+   Opens in a phone frame on wide screens; fills the screen on phones or with ?embed=1. */
+:root {
+  --bg: #000; --fg: #fff; --dim: #9a9a9a; --line: #3a3a3a; --stage: #E9E6DF;
+  --mono: "Roboto Mono", ui-monospace, Menlo, monospace;
+  --sans: "Jost", "Futura", "Avenir Next", system-ui, sans-serif;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; }
+body { background: var(--stage); font-family: var(--sans); -webkit-font-smoothing: antialiased; }
+button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
+img { display: block; max-width: 100%; height: auto; }
+:focus-visible { outline: 1.5px dashed #fff; outline-offset: 3px; }
+
+/* stage + phone frame */
+.stage { min-height: 100%; display: grid; place-items: center; padding: 32px 16px; gap: 16px; }
+.phone { position: relative; width: 390px; height: 844px; border-radius: 56px; background: #161618; padding: 12px; box-shadow: 0 30px 60px rgb(0 0 0 / .18), 0 4px 10px rgb(0 0 0 / .1); }
+.phone::before { content: ""; position: absolute; top: 22px; left: 50%; translate: -50% 0; width: 110px; height: 30px; border-radius: 20px; background: #000; z-index: 30; }
+.app { position: relative; width: 100%; height: 100%; border-radius: 44px; overflow: hidden; background: var(--bg); color: var(--fg); }
+.caption { font: 400 13px/1.4 var(--mono); color: #6b675f; text-align: center; }
+.caption a { color: inherit; }
+@media (max-width: 500px), (max-height: 700px) { body:not(.framed) .stage { padding: 0; display: block; } body:not(.framed) .phone { width: 100%; height: 100dvh; border-radius: 0; padding: 0; box-shadow: none; } body:not(.framed) .phone::before { display: none; } body:not(.framed) .app { border-radius: 0; } body:not(.framed) .caption { display: none; } }
+body.embed .stage { padding: 0; display: block; } body.embed .phone { width: 100%; height: 100dvh; border-radius: 0; padding: 0; box-shadow: none; background: #000; } body.embed .phone::before { display: none; } body.embed .app { border-radius: 0; } body.embed .caption { display: none; }
+
+/* views */
+.view { position: absolute; inset: 0; overflow-y: auto; overscroll-behavior: contain; background: var(--bg); opacity: 0; visibility: hidden; transform: translateX(16px); transition: opacity .22s, transform .22s, visibility 0s .22s; scrollbar-width: none; }
+.view::-webkit-scrollbar { display: none; }
+.view.on { opacity: 1; visibility: visible; transform: none; transition: opacity .22s, transform .22s; }
+@media (prefers-reduced-motion: reduce) { .view, .view.on { transition: none; transform: none; } }
+.pad { padding: 0 30px; }
+.top { position: sticky; top: 0; z-index: 5; display: flex; align-items: center; gap: 14px; padding: 58px 22px 16px 22px; background: var(--bg); font: 700 17px/1.2 var(--mono); }
+.top .back { width: 30px; height: 30px; display: grid; place-items: center; flex: none; border-radius: 50%; }
+.top .back svg { width: 18px; height: 18px; }
+.top span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.mono { font-family: var(--mono); }
+.rule { height: 1px; background: #fff; margin: 0; border: 0; }
+.short { width: 62px; }
+p { margin: 0; }
+
+/* home */
+.home h1 { margin: 0; padding: 66px 0 22px; font: 700 22px/1.25 var(--mono); letter-spacing: -0.01em; }
+.label { font: 700 14.5px/1.3 var(--mono); margin-top: 28px; }
+.ex-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin: 12px 0 16px; width: 100%; text-align: left; }
+.ex-row h2 { margin: 0; font: 700 21px/1.25 var(--mono); }
+.circ { flex: none; width: 24px; height: 24px; border: 1.5px solid #fff; border-radius: 50%; display: grid; place-items: center; }
+.circ svg { width: 12px; height: 12px; }
+.cols2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 16px; font-size: 11.5px; line-height: 1.45; }
+.cols2 .r { padding-top: 46px; }
+.cols2 b { font-weight: 500; display: block; letter-spacing: .02em; }
+.sec { margin-top: 32px; padding-top: 30px; border-top: 1px solid #fff; }
+.sec h2 { margin: 0 0 14px; font: 700 19px/1.3 var(--mono); }
+.sec p { font-size: 12px; line-height: 1.55; color: #d6d6d6; }
+.info { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 26px; font-size: 11.5px; line-height: 1.45; }
+.info img { width: 100%; aspect-ratio: 161 / 140; object-fit: cover; }
+.info p + p { margin-top: 10px; }
+.past { list-style: none; margin: 18px 0 0; padding: 0; display: grid; gap: 22px; }
+.past button { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; align-items: center; width: 100%; text-align: left; font-size: 12px; line-height: 1.45; }
+.past img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; }
+.find-wrap { position: sticky; bottom: 0; padding: 26px 30px 30px; background: linear-gradient(transparent, #000 38%); margin-top: 8px; }
+.find { display: block; width: 100%; padding: 22px 0; border: 1.5px solid #fff; background: #000; font: 700 16px/1 var(--mono); letter-spacing: .02em; }
+.find:active { background: #fff; color: #000; }
+
+/* tabs + lists */
+.ex-title { margin: 6px 0 0; font: 700 18px/1.3 var(--mono); }
+.tabs { display: flex; gap: 28px; margin: 22px 0 26px; font: 700 13px/1 var(--mono); }
+.tabs button { padding-bottom: 7px; color: #cfcfcf; border-bottom: 1.5px solid transparent; }
+.tabs button[aria-selected="true"] { color: #fff; border-color: #fff; }
+.list { list-style: none; margin: 0; padding: 0 0 40px; display: grid; gap: 34px; }
+.item { display: grid; grid-template-columns: 130px 1fr; gap: 20px; width: 100%; text-align: left; }
+.item img { width: 130px; height: 135px; object-fit: cover; }
+.item .t { display: flex; flex-direction: column; min-height: 135px; font: 700 13px/1.35 var(--mono); }
+.item .t .sub { margin-top: auto; font-size: 11.5px; }
+.item .t .more { align-self: flex-end; margin-top: 4px; font: 400 9.5px/1 var(--mono); color: #bdbdbd; }
+
+/* scan */
+.scan { display: flex; flex-direction: column; overflow: hidden; }
+.cam { position: relative; flex: 1; min-height: 0; overflow: hidden; background: #222; }
+.cam img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: opacity .35s, filter .6s; }
+.cam.busy img { filter: blur(1.5px) brightness(.92); }
+.cam .msg { position: absolute; left: 0; right: 0; top: 46%; text-align: center; font: 700 12.5px/1.2 var(--mono); text-shadow: 0 1px 6px rgb(0 0 0 / .5); }
+.corner { position: absolute; width: 60px; height: 58px; border: 2px solid #fff; opacity: 0; transition: opacity .3s, transform .35s; }
+.c1 { top: 22%; left: 6%; border-right: 0; border-bottom: 0; transform: translate(-10px, -10px); }
+.c2 { top: 22%; right: 6%; border-left: 0; border-bottom: 0; transform: translate(10px, -10px); }
+.c3 { bottom: 8%; left: 6%; border-right: 0; border-top: 0; transform: translate(-10px, 10px); }
+.c4 { bottom: 8%; right: 6%; border-left: 0; border-top: 0; transform: translate(10px, 10px); }
+.found .corner { opacity: 1; transform: none; }
+.sweep { position: absolute; left: 0; right: 0; height: 2px; top: 0; background: linear-gradient(90deg, transparent, rgb(255 255 255 / .8), transparent); opacity: 0; }
+.cam.busy .sweep { opacity: 1; animation: sweep 1.4s ease-in-out infinite; }
+@keyframes sweep { from { top: 12%; } to { top: 88%; } }
+@media (prefers-reduced-motion: reduce) { .cam.busy .sweep { animation: none; top: 50%; } }
+.scan-ui { flex: none; padding: 26px 34px 34px; display: grid; gap: 22px; justify-items: center; background: #000; }
+.result { width: 100%; min-height: 52px; border: 1.5px solid #fff; display: flex; align-items: center; justify-content: center; gap: 12px; padding: 8px 16px; font: italic 400 12px/1.35 var(--mono); text-align: left; }
+.result[disabled] { cursor: default; color: #e6e6e6; }
+.result .circ { margin-left: auto; }
+.result:not([disabled]) span { margin-left: auto; }
+.shutter { width: 68px; height: 68px; border-radius: 50%; border: 3px solid #fff; padding: 4px; }
+.shutter i { display: block; width: 100%; height: 100%; border-radius: 50%; background: #fff; transition: transform .15s; }
+.shutter:active i { transform: scale(.88); }
+.hint { font: 400 10.5px/1.3 var(--mono); color: var(--dim); margin-top: -10px; }
+
+/* artwork */
+.art-img { width: 100%; height: auto; }
+.meta { margin-top: 26px; font: 400 12px/1.45 var(--mono); }
+.meta b { display: block; }
+.desc { margin-top: 18px; font-size: 12.5px; line-height: 1.6; color: #e0e0e0; }
+.desc p + p { margin-top: 2px; }
+.audio { margin-top: 26px; padding: 16px 16px 14px; border: 1px solid var(--line); }
+.audio h3 { margin: 0 0 14px; text-align: center; font: 700 14px/1 var(--mono); }
+.bar { position: relative; height: 3px; background: #555; border-radius: 2px; cursor: pointer; }
+.bar i { position: absolute; left: 0; top: 0; bottom: 0; width: var(--p, 0%); background: #fff; border-radius: 2px; }
+.bar b { position: absolute; top: 50%; left: var(--p, 0%); width: 15px; height: 15px; translate: -50% -50%; border-radius: 50%; background: #fff; }
+.times { display: flex; justify-content: space-between; margin-top: 10px; font: 400 11px/1 var(--sans); color: #a9b0d8; }
+.ctrls { display: flex; justify-content: center; gap: 34px; margin-top: 10px; }
+.ctrls button { width: 30px; height: 30px; display: grid; place-items: center; }
+.ctrls svg { width: 22px; height: 22px; }
+.tts { margin-top: 10px; text-align: center; font: 400 10px/1.3 var(--mono); color: var(--dim); }
+.comment { display: flex; align-items: center; gap: 10px; margin-top: 30px; height: 56px; padding: 0 16px 0 22px; border: 1.5px solid #fff; }
+.comment input { flex: 1; min-width: 0; background: none; border: 0; color: #fff; font: 700 12px/1 var(--mono); }
+.comment input::placeholder { color: #9a9a9a; }
+.comment input:focus { outline: none; }
+.comment:focus-within { border-color: #fff; box-shadow: 0 0 0 1px #fff; }
+.comment button svg { width: 20px; height: 20px; }
+.thread { list-style: none; margin: 30px 0 0; padding: 0 0 0 26px; border-left: 1px solid #fff; display: grid; gap: 18px; }
+.thread .reply { margin-left: 24px; padding-left: 24px; border-left: 1px solid #fff; }
+.cm { display: grid; grid-template-columns: 1fr auto; gap: 4px 12px; font: 400 11.5px/1.4 var(--mono); }
+.cm .who b { font-weight: 700; }
+.cm .acts { display: flex; gap: 12px; align-items: flex-start; grid-row: span 2; }
+.cm .acts button svg { width: 15px; height: 15px; }
+.cm .acts .liked svg { fill: #fff; }
+.cm .acts small { font-size: 10px; color: var(--dim); margin-left: -8px; }
+.cm.new { animation: in .35s ease-out; }
+@keyframes in { from { opacity: 0; transform: translateY(-6px); } }
+.artist-h { margin: 6px 0 22px; font: 700 18px/1.2 var(--mono); }
+.artist-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; align-items: end; }
+.artist-row img { width: 100%; aspect-ratio: 130 / 136; object-fit: cover; }
+.artist-row .r { font: 400 11px/1.5 var(--mono); }
+.artist-row .r a { display: inline-block; margin-top: 30px; color: #fff; }
+.statement h3 { margin: 30px 0 12px; font: 700 13px/1 var(--mono); }
+.statement p { font-size: 12px; line-height: 1.6; color: #e0e0e0; }
+.contact { display: flex; gap: 14px; margin-top: 34px; }
+.contact a, .contact button { width: 26px; height: 26px; display: grid; place-items: center; color: #fff; }
+.contact svg { width: 20px; height: 20px; }
+.small { margin-top: 12px; font: 400 10.5px/1.45 var(--mono); color: #cfcfcf; }
+.proc-h { display: flex; justify-content: space-between; font: 700 13px/1 var(--mono); margin-bottom: 26px; }
+.proc { list-style: none; margin: 0; padding: 0 0 40px; display: grid; gap: 30px; }
+.proc li { display: grid; grid-template-columns: 112px 1fr; gap: 20px; align-items: start; }
+.proc img { width: 100%; aspect-ratio: 107 / 125; object-fit: cover; }
+.proc p { text-align: right; font: 400 11px/1.45 var(--mono); }
+
+/* past */
+.past-h { margin: 6px 0 22px; font: 700 18px/1.35 var(--mono); }
+.past-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 22px; padding-bottom: 50px; font-size: 11.5px; line-height: 1.5; }
+.past-grid p + p { margin-top: 14px; }
+
+/* toast */
+.toast { position: absolute; left: 18px; right: 18px; bottom: 26px; z-index: 40; padding: 13px 16px; border-radius: 12px; background: #fff; color: #000; font: 400 12px/1.4 var(--mono); opacity: 0; transform: translateY(10px); transition: opacity .2s, transform .2s; pointer-events: none; }
+.toast.on { opacity: 1; transform: none; }
+</style>
+</head>
+<body>
+<div class="stage">
+  <div class="phone">
+    <div class="app" id="app">
+
+      <!-- ===== home ===== -->
+      <section class="view home on" data-view="home" aria-label="Home">
+        <div class="pad">
+          <h1>WashU Sam Fox Gallery</h1>
+          <hr class="rule short">
+          <p class="label">Current Exhibition</p>
+          <button class="ex-row" data-go="exhibition" aria-label="Open exhibition: Preheat the Oven">
+            <h2>Preheat the Oven</h2><span class="circ" aria-hidden="true"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M2 6h8M6.5 2.5 10 6l-3.5 3.5"/></svg></span>
+          </button>
+          <img src="img/opening.jpg" width="762" height="468" alt="Visitors at the opening of Preheat the Oven, walking between paintings and a sculpture on a plinth">
+          <div class="cols2">
+            <p>The Sam Fox School presents “Preheat the Oven”, the 2026 BFA in Studio Art Junior Exhibition from March 27th to April 10.</p>
+            <p class="r"><b>FEATURED ARTISTS</b>Xiomara Colopy • Maya Dabney • Saskia Dentman • Sophia Frist • Levin Garson • Ava Jones • Malia King • Min-Suh Kwak • Sooah Lee • Tai Moore • Scarlet Reo • Nev Turco • Jana Yan • Sophia Yang</p>
+          </div>
+          <div class="sec">
+            <h2>About the Gallery</h2>
+            <p>The WashU Sam Fox School Gallery provides students and faculty two formal gallery spaces for presenting exhibitions, and also shows work by widely known contemporary artists. Located less than a mile from campus along the Delmar Loop, the gallery opened in 2025 with 2,950 square feet of exhibition space.</p>
+            <div class="info">
+              <img src="img/manager.jpg" width="161" height="140" alt="Gallery manager">
+              <div><p>Hours<br>Wednesday-Saturday, 12-5 p.m. and by appointment.</p><p>Contact Us<br>314-935-7454</p><p>Location<br>6128 Delmar Blvd.</p></div>
+            </div>
+          </div>
+          <div class="sec">
+            <h2>Past Exhibition</h2>
+            <ul class="past">
+              <li><button data-go="past"><img src="img/past-timelapse.jpg" width="162" height="108" alt=""><span>Time Lapse: New Faculty in Design and Visual Art</span></button></li>
+              <li><button data-toast="past"><img src="img/past-dream.jpg" width="162" height="108" alt=""><span>Dream Machines: Works from Up-Cycles: Form, Function, and Design</span></button></li>
+              <li><button data-toast="past"><img src="img/past-lucky.jpg" width="162" height="108" alt=""><span>Lucky 13: MFA-VA Summer Projects Exhibition</span></button></li>
+            </ul>
+          </div>
+        </div>
+        <div class="find-wrap"><button class="find" data-go="scan">Find Artwork</button></div>
+      </section>
+
+      <!-- ===== exhibition ===== -->
+      <section class="view" data-view="exhibition" aria-label="Exhibition">
+        <header class="top"><button class="back" aria-label="Back"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M11.5 3 5.5 9l6 6"/></svg></button><span>WashU Sam Fox Gallery</span></header>
+        <div class="pad">
+          <h2 class="ex-title">Exhibition: Preheat the Oven</h2>
+          <div class="tabs" role="tablist">
+            <button role="tab" aria-selected="true" data-tab="works">Artworks in show</button>
+            <button role="tab" aria-selected="false" data-tab="artists">Artists in show</button>
+          </div>
+          <div data-panel="works">
+            <ul class="list">
+              <li><button class="item" data-go="artwork" data-art="body"><img src="img/t-body.jpg" width="130" height="135" alt=""><span class="t">Her Body Was There Before I Found It<span class="sub">Jana Yan<br>2026</span><span class="more">learn more →</span></span></button></li>
+              <li><button class="item" data-toast="art"><img src="img/t-sink.jpg" width="130" height="135" alt=""><span class="t">On the sink<span class="sub">2026</span><span class="more">learn more →</span></span></button></li>
+              <li><button class="item" data-toast="art"><img src="img/t-home.jpg" width="130" height="135" alt=""><span class="t">Home? Home<span class="sub">2026</span><span class="more">learn more →</span></span></button></li>
+              <li><button class="item" data-toast="art"><img src="img/t-playground.jpg" width="130" height="135" alt=""><span class="t">Playground<span class="sub">2026</span><span class="more">learn more →</span></span></button></li>
+              <li><button class="item" data-go="artwork" data-art="closet"><img src="img/t-closet.jpg" width="130" height="135" alt=""><span class="t">Mom’s Closet<span class="sub">Jana Yan<br>2026</span><span class="more">learn more →</span></span></button></li>
+            </ul>
+          </div>
+          <div data-panel="artists" hidden>
+            <ul class="list">
+              <li><button class="item" data-toast="artist"><img src="img/a-sophia.jpg" width="130" height="136" alt=""><span class="t">Sophia Frist<span class="sub">Current Junior<br>B.F.A in Studio Art</span><span class="more">artist page →</span></span></button></li>
+              <li><button class="item" data-go="artwork" data-art="body" data-tabto="artist"><img src="img/a-jana.jpg" width="130" height="136" alt=""><span class="t">Jana Yan<span class="sub">Current Junior<br>B.F.A in Studio Art</span><span class="more">artist page →</span></span></button></li>
+              <li><button class="item" data-toast="artist"><img src="img/a-sooah.jpg" width="130" height="136" alt=""><span class="t">Sooah Lee<span class="sub">Current Junior<br>B.F.A in Studio Art</span><span class="more">artist page →</span></span></button></li>
+              <li><button class="item" data-toast="artist"><img src="img/a-levin.jpg" width="130" height="136" alt=""><span class="t">Levin Garson<span class="sub">Current Junior<br>B.F.A in Studio Art</span><span class="more">artist page →</span></span></button></li>
+              <li><button class="item" data-toast="artist"><img src="img/a-ava.jpg" width="130" height="136" alt=""><span class="t">Ava Jones<span class="sub">Current Junior<br>B.F.A in Studio Art</span><span class="more">artist page →</span></span></button></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== scan ===== -->
+      <section class="view scan" data-view="scan" aria-label="Find artwork">
+        <header class="top"><button class="back" aria-label="Back"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M11.5 3 5.5 9l6 6"/></svg></button><span>WashU Sam Fox Gallery</span></header>
+        <div class="cam" id="cam">
+          <img id="camImg" src="img/body.jpg" alt="Camera view of an artwork in the gallery">
+          <span class="sweep" aria-hidden="true"></span>
+          <span class="corner c1"></span><span class="corner c2"></span><span class="corner c3"></span><span class="corner c4"></span>
+          <p class="msg" id="camMsg" aria-live="polite">Point your camera at an artwork</p>
+        </div>
+        <div class="scan-ui">
+          <button class="result" id="result" disabled><span id="resultText">Identifying artwork...</span></button>
+          <button class="shutter" id="shutter" aria-label="Scan another artwork"><i></i></button>
+          <p class="hint">tap the shutter to scan the next artwork</p>
+        </div>
+      </section>
+
+      <!-- ===== artwork ===== -->
+      <section class="view" data-view="artwork" aria-label="Artwork">
+        <header class="top"><button class="back" aria-label="Back"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M11.5 3 5.5 9l6 6"/></svg></button><span id="artTop"></span></header>
+        <div class="pad">
+          <div class="tabs" role="tablist" style="margin-top:2px">
+            <button role="tab" aria-selected="true" data-tab="work">the work</button>
+            <button role="tab" aria-selected="false" data-tab="artist">the artist</button>
+            <button role="tab" aria-selected="false" data-tab="process">the process</button>
+          </div>
+
+          <div data-panel="work">
+            <img class="art-img" id="artImg" alt="">
+            <p class="meta"><b>Jana Yan</b><span id="artTitle"></span><br>2026</p>
+            <div class="desc" id="artDesc"></div>
+            <div class="audio" role="group" aria-label="Audio guide">
+              <h3>About the work</h3>
+              <div class="bar" id="bar" role="slider" aria-label="Audio position" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0"><i></i><b></b></div>
+              <div class="times"><span id="tNow">00:00</span><span id="tEnd">00:00</span></div>
+              <div class="ctrls">
+                <button id="aPrev" aria-label="Restart"><svg viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4v14M17 4 8 11l9 7z"/></svg></button>
+                <button id="aPlay" aria-label="Play"><svg id="icoPlay" viewBox="0 0 22 22" fill="currentColor"><path d="M7 4.5v13l11-6.5z"/></svg><svg id="icoPause" viewBox="0 0 22 22" fill="currentColor" style="display:none"><path d="M6.5 4h3v14h-3zM12.5 4h3v14h-3z"/></svg></button>
+                <button id="aNext" aria-label="Skip to end"><svg viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 4v14M5 4l9 7-9 7z"/></svg></button>
+              </div>
+              <p class="tts" id="tts">plays a read-aloud of the description</p>
+            </div>
+            <form class="comment" id="cform" autocomplete="off">
+              <input id="cinput" type="text" maxlength="200" placeholder="Leave a thought or comment" aria-label="Leave a thought or comment">
+              <button aria-label="Post comment"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 2 2 9l6.5 2.5L11 18z M18 2 8.5 11.5"/></svg></button>
+            </form>
+            <ul class="thread" id="thread" aria-label="Comments"></ul>
+            <div style="height:44px"></div>
+          </div>
+
+          <div data-panel="artist" hidden>
+            <h2 class="artist-h">Jana Yan</h2>
+            <div class="artist-row">
+              <img src="img/a-jana.jpg" width="130" height="136" alt="Portrait of Jana Yan">
+              <div class="r">Junior<br>BFA in Studio Art<br><a href="../../" target="_blank" rel="noopener">personal website ↗</a></div>
+            </div>
+            <div class="statement">
+              <h3>Artist Statement:</h3>
+              <p>As an artist I pay attention to things and spaces around me and the everyday surroundings that shape how we move through the world. I explore the relationship between natural and manufactured environments, and their relationship with memories. While emphasizing materiality, I also focus on conveying the lived experience of being within these spaces. My work reflects my own encounters with the environment, as well as the cultural, social, and historical forces that have shaped and transformed it. With a background in computer science and digital design, I also explore machine and program driven movements and integrate design principles into my studio practice.</p>
+            </div>
+            <div class="contact">
+              <a href="mailto:yanjana002@gmail.com" aria-label="Email the artist"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="2" y="4" width="16" height="12" rx="1.5"/><path d="m2.5 5 7.5 6 7.5-6"/></svg></a>
+              <a href="https://www.instagram.com/madebyjanayan/" target="_blank" rel="noopener" aria-label="Artist on Instagram"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="2.5" y="2.5" width="15" height="15" rx="4"/><circle cx="10" cy="10" r="3.4"/><circle cx="14.4" cy="5.6" r=".8" fill="currentColor"/></svg></a>
+            </div>
+            <p class="small">Questions or inquiries?<br>Feel free to contact the artist!</p>
+            <div style="height:50px"></div>
+          </div>
+
+          <div data-panel="process" hidden>
+            <div class="proc-h"><span>Process Photos</span><span>Description</span></div>
+            <ul class="proc" id="proc"></ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== past exhibition ===== -->
+      <section class="view" data-view="past" aria-label="Past exhibition">
+        <header class="top"><button class="back" aria-label="Back"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M11.5 3 5.5 9l6 6"/></svg></button><span>WashU Sam Fox Gallery</span></header>
+        <div class="pad">
+          <h2 class="past-h">Time Lapse: New Faculty in Design and Visual Art</h2>
+          <img src="img/timelapse-poster.jpg" width="342" height="229" alt="Time Lapse exhibition poster" style="width:100%">
+          <p style="margin-top:22px;font-size:12px;line-height:1.6;color:#e0e0e0">Time Lapse features work from new and recent faculty additions in Design and Visual Art at the Sam Fox School. The works presented explore time as process, as medium, and in relationship to place and to our past in order to clarify the present moment. At the same time, these recent faculty additions offer a lens into the future of art and design at WashU and in the region.</p>
+          <div class="past-grid">
+            <div><p>FEATURED FACULTY ARTISTS</p><p>Josh Azzarella • Tiffany Calvert • Joe deVera • Bei Hu • Megan Irwin • Aida Lizalde • Luiz Ludwig • Laurel Schwulst</p></div>
+            <div><p>On View<br>Jan 23 – Feb 28</p><p>Opening Reception<br>Friday, Jan. 23 from 5-7 p.m.</p><p>Gallery Hours<br>Wed-Sat, 12 - 5 p.m.</p></div>
+          </div>
+        </div>
+      </section>
+
+      <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    </div>
+  </div>
+  <p class="caption">Gallery Guide · clickable prototype · <a href="../">read the case study</a></p>
+</div>
+
+<script>
+(() => {
+  const qs = new URLSearchParams(location.search);
+  if (qs.has("embed")) document.body.classList.add("embed");
+
+  const ARTS = {
+    body: {
+      top: "Her Body Was There Before I Found It", title: "Her Body Was There Before I Found It",
+      img: "img/body.jpg", w: 343, h: 363, scan: "img/body.jpg",
+      alt: "Her Body Was There Before I Found It: white plaster forms twisting through a thin metal frame in the gallery",
+      desc: ["In this piece I explore the relationship between the living and non-living, and the idea of time and decay. Using wire, plaster, plastic and silicon, I created a form between human and imaginary body, which sits on an alter-like shaped frame. With the piece being life-sized, I wish for the viewer to be able to relate their own bodily experience with the form of my creation, thinking about what it means to exist as human."],
+      process: [
+        ["img/p-body-1.jpg", "For each “bodily organism” part of the sculpture, I start with making a wire skeleton to confirm the overall shape and size of them."],
+        ["img/p-body-2.jpg", "Using plaster on fabric, I covered the wire skeletons of the sculpture to create flesh and volume."],
+        ["img/p-body-3.jpg", "These are the first two bodily creatures I made using the process described above. According to their shape and relationship in space, I am going to make the last organism and the supporting framework behind them."]
+      ],
+      comments: [
+        { who: "Anonymous Bunny", when: "17 minutes ago", text: "The shadows on the wall feel like part of the piece." },
+        { who: "Anonymous Ibex", when: "4 hours ago", text: "I walked around it twice before I noticed the third figure.", replies: [
+          { who: "Anonymous Hippo", when: "4 minutes ago", text: "Same, it changes from every side." }
+        ] }
+      ]
+    },
+    closet: {
+      top: "Mom’s Closet", title: "Everything I Stole From Mom",
+      img: "img/closet.jpg", w: 343, h: 443, scan: "img/closet.jpg",
+      alt: "Mom’s Closet: a hand-built wooden closet frame holding fabric clothing printed with grey ink rubbings",
+      desc: ["EVER SINCE I WAS A KID I WANTED TO BE LIKE MOM.", "I remember sneaking into her bathroom at night, opening her cabinet behind the mirror, and trying her lipstick on my little lips. Similarly, I have tried on her dresses, her coats, her heels, and her perfume.", "As I grew up mom would offer to give me some of her things, that she doesn’t use or wear anymore.", "“I’m too old for these”, she says.", "Sometimes I also ask for, or just take things from her."],
+      process: [
+        ["img/p-closet-1.jpg", "I printed the clothing items using ink rubbing on fabric."],
+        ["img/p-closet-2.jpg", "Using etching technique, I printed the list of “things” that I “stole” from my mother."],
+        ["img/p-closet-3.jpg", "I hand made the closet frame using wood, so it fits the specific dimension for the items displayed for this project."]
+      ],
+      comments: [
+        { who: "Anonymous Hippo", when: "2 minutes ago", text: "The ink rubbings look like x-rays of the clothes." },
+        { who: "Anonymous Bunny", when: "17 minutes ago", text: "This made me want to call my mom." },
+        { who: "Anonymous Ibex", when: "4 hours ago", text: "Is the list on the shelf the etching?", replies: [
+          { who: "Anonymous Hippo", when: "4 minutes ago", text: "Yes, check the process tab." }
+        ] }
+      ]
+    }
+  };
+  const SCAN_ORDER = ["body", "closet"];
+
+  const app = document.getElementById("app");
+  const views = Object.fromEntries([...app.querySelectorAll(".view")].map(v => [v.dataset.view, v]));
+  const stack = ["home"];
+
+  function show(name) {
+    Object.entries(views).forEach(([k, v]) => { const on = k === name; v.classList.toggle("on", on); v.toggleAttribute("inert", !on); v.setAttribute("aria-hidden", String(!on)); });
+    views[name].scrollTop = 0;
+    if (name !== "artwork") audio.stop();
+    if (name === "scan") scan.start(); else scan.stop();
+  }
+  function go(name, opts = {}) {
+    if (name === "artwork") renderArt(opts.art || "body", opts.tab || "work");
+    stack.push(name); show(name);
+  }
+  function back() { if (stack.length > 1) stack.pop(); show(stack[stack.length - 1]); }
+  Object.values(views).forEach(v => v.toggleAttribute("inert", !v.classList.contains("on")));
+
+  const toast = (() => {
+    const el = document.getElementById("toast"); let t;
+    const MSG = {
+      art: "This prototype has full pages for two artworks: Her Body Was There Before I Found It and Mom’s Closet.",
+      artist: "Only Jana Yan’s artist page is built in this prototype.",
+      past: "Only Time Lapse has a full page in this prototype."
+    };
+    return k => { el.textContent = MSG[k] || k; el.classList.add("on"); clearTimeout(t); t = setTimeout(() => el.classList.remove("on"), 2600); };
+  })();
+
+  app.addEventListener("click", e => {
+    const b = e.target.closest("button, a"); if (!b || !app.contains(b)) return;
+    if (b.classList.contains("back")) return back();
+    if (b.dataset.go) return go(b.dataset.go, { art: b.dataset.art, tab: b.dataset.tabto });
+    if (b.dataset.toast) return toast(b.dataset.toast);
+    if (b.dataset.tab) return selectTab(b);
+  });
+
+  function selectTab(btn) {
+    const list = btn.closest(".tabs"), root = list.parentElement;
+    list.querySelectorAll("button").forEach(x => x.setAttribute("aria-selected", String(x === btn)));
+    root.querySelectorAll(":scope > [data-panel]").forEach(p => p.hidden = p.dataset.panel !== btn.dataset.tab);
+    if (btn.dataset.tab !== "work") audio.pause();
+  }
+
+  // ---------- scan ----------
+  const scan = (() => {
+    const cam = document.getElementById("cam"), img = document.getElementById("camImg"), msg = document.getElementById("camMsg");
+    const res = document.getElementById("result"), txt = document.getElementById("resultText");
+    let idx = 0, timer;
+    const ARROW = '<span class="circ" aria-hidden="true"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M2 6h8M6.5 2.5 10 6l-3.5 3.5"/></svg></span>';
+    function start() {
+      clearTimeout(timer);
+      const art = ARTS[SCAN_ORDER[idx]];
+      img.src = art.scan; cam.classList.remove("found"); cam.classList.add("busy");
+      msg.textContent = "Point your camera at an artwork";
+      res.disabled = true; res.innerHTML = '<span>Identifying artwork...</span>'; res.removeAttribute("data-art");
+      timer = setTimeout(() => {
+        cam.classList.remove("busy"); cam.classList.add("found"); msg.textContent = "Artwork found!";
+        res.disabled = false; res.dataset.art = SCAN_ORDER[idx];
+        res.innerHTML = `<span>${art.top}</span>${ARROW}`; res.setAttribute("aria-label", "Open " + art.top);
+      }, 1700);
+    }
+    function stop() { clearTimeout(timer); }
+    res.addEventListener("click", () => { if (!res.disabled) go("artwork", { art: res.dataset.art }); });
+    document.getElementById("shutter").addEventListener("click", () => { idx = (idx + 1) % SCAN_ORDER.length; start(); });
+    return { start, stop };
+  })();
+
+  // ---------- artwork ----------
+  let current = "body";
+  function renderArt(key, tab) {
+    current = key; const a = ARTS[key];
+    document.getElementById("artTop").textContent = a.top;
+    const im = document.getElementById("artImg"); im.src = a.img; im.width = a.w; im.height = a.h; im.alt = a.alt;
+    document.getElementById("artTitle").textContent = a.title;
+    document.getElementById("artDesc").innerHTML = a.desc.map(p => `<p>${p}</p>`).join("");
+    document.getElementById("proc").innerHTML = a.process.map(([src, t]) => `<li><img src="${src}" alt="Process photo"><p>${t}</p></li>`).join("");
+    renderThread();
+    audio.load(a.desc.join(" "));
+    const btn = views.artwork.querySelector(`.tabs [data-tab="${tab}"]`); selectTab(btn);
+  }
+
+  // comments live per artwork in memory (they reset on reload: this is a prototype)
+  const HEART = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M8 13.5S2 10 2 6a3 3 0 0 1 6-1 3 3 0 0 1 6 1c0 4-6 7.5-6 7.5z"/></svg>';
+  const REPLY = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M6 4 2 8l4 4M2 8h7a5 5 0 0 1 5 5"/></svg>';
+  const esc = s => s.replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  function cmHTML(c, path, isNew) {
+    return `<div class="cm${isNew ? " new" : ""}"><span class="who"><b>${esc(c.who)}</b> • ${esc(c.when)}</span><span class="acts"><button data-reply="${esc(c.who)}" aria-label="Reply to ${esc(c.who)}">${REPLY}</button><button data-like="${path}" class="${c.liked ? "liked" : ""}" aria-pressed="${!!c.liked}" aria-label="Like">${HEART}</button>${c.likes ? `<small>${c.likes}</small>` : ""}</span><span>${esc(c.text)}</span></div>`;
+  }
+  let lastNew = null;
+  function renderThread() {
+    const list = ARTS[current].comments;
+    document.getElementById("thread").innerHTML = list.map((c, i) =>
+      `<li>${cmHTML(c, i, lastNew === c)}${(c.replies || []).map((r, j) => `<div class="reply" style="margin-top:14px">${cmHTML(r, i + "." + j, lastNew === r)}</div>`).join("")}</li>`).join("");
+    lastNew = null;
+  }
+  document.getElementById("thread").addEventListener("click", e => {
+    const like = e.target.closest("[data-like]"), rep = e.target.closest("[data-reply]");
+    if (like) {
+      const [i, j] = like.dataset.like.split(".").map(Number), list = ARTS[current].comments;
+      const c = j === undefined || isNaN(j) ? list[i] : list[i].replies[j];
+      c.liked = !c.liked; c.likes = (c.likes || 0) + (c.liked ? 1 : -1); renderThread();
+    } else if (rep) {
+      const inp = document.getElementById("cinput"); inp.value = "@" + rep.dataset.reply + " "; inp.focus();
+    }
+  });
+  document.getElementById("cform").addEventListener("submit", e => {
+    e.preventDefault();
+    const inp = document.getElementById("cinput"), text = inp.value.trim(); if (!text) return;
+    const c = { who: "You", when: "just now", text }; lastNew = c;
+    ARTS[current].comments.unshift(c); inp.value = ""; renderThread();
+  });
+
+  // ---------- audio guide: browser read-aloud of the description, with a timeline ----------
+  const audio = (() => {
+    const bar = document.getElementById("bar"), now = document.getElementById("tNow"), end = document.getElementById("tEnd");
+    const play = document.getElementById("aPlay"), icoP = document.getElementById("icoPlay"), icoS = document.getElementById("icoPause");
+    const tts = "speechSynthesis" in window ? window.speechSynthesis : null;
+    if (!tts) document.getElementById("tts").textContent = "read-aloud isn’t available in this browser; the timeline still plays";
+    let text = "", dur = 1, pos = 0, playing = false, tick, utter = null, started = false;
+    const fmt = s => `${String(Math.floor(s / 60)).padStart(2, "0")}:${String(Math.floor(s % 60)).padStart(2, "0")}`;
+    function draw() { const p = Math.min(100, pos / dur * 100); bar.style.setProperty("--p", p + "%"); bar.setAttribute("aria-valuenow", Math.round(p)); now.textContent = fmt(pos); }
+    function icons() { icoP.style.display = playing ? "none" : ""; icoS.style.display = playing ? "" : "none"; play.setAttribute("aria-label", playing ? "Pause" : "Play"); }
+    function load(t) { stop(); text = t; dur = Math.max(8, Math.round(t.split(/\s+/).length / 2.5)); pos = 0; end.textContent = fmt(dur); draw(); }
+    function speakFrom(sec) {
+      if (!tts) return;
+      tts.cancel();
+      const words = text.split(/\s+/), from = Math.floor(words.length * (sec / dur));
+      utter = new SpeechSynthesisUtterance(words.slice(from).join(" ")); utter.rate = 1;
+      utter.onend = () => { if (playing && utter) { pos = dur; draw(); playing = false; icons(); clearInterval(tick); } };
+      tts.speak(utter); started = true;
+    }
+    function startTick() { clearInterval(tick); tick = setInterval(() => { pos = Math.min(dur, pos + .25); draw(); if (pos >= dur && !tts) { pause(); } }, 250); }
+    function doPlay() {
+      if (pos >= dur) pos = 0;
+      playing = true; icons(); startTick();
+      if (tts) { if (started && tts.paused) tts.resume(); else speakFrom(pos); }
+    }
+    function pause() { playing = false; icons(); clearInterval(tick); if (tts && tts.speaking) tts.pause(); }
+    function stop() { playing = false; started = false; clearInterval(tick); if (tts) { utter = null; tts.cancel(); } icons(); }
+    play.addEventListener("click", () => playing ? pause() : doPlay());
+    document.getElementById("aPrev").addEventListener("click", () => { const was = playing; stop(); pos = 0; draw(); if (was) doPlay(); });
+    document.getElementById("aNext").addEventListener("click", () => { stop(); pos = dur; draw(); });
+    function seek(clientX) { const r = bar.getBoundingClientRect(); pos = Math.max(0, Math.min(1, (clientX - r.left) / r.width)) * dur; draw(); started = false; if (playing) { speakFrom(pos); } else if (tts) tts.cancel(); }
+    bar.addEventListener("click", e => seek(e.clientX));
+    bar.addEventListener("keydown", e => { if (e.key === "ArrowRight" || e.key === "ArrowLeft") { e.preventDefault(); const r = bar.getBoundingClientRect(); seek(r.left + r.width * Math.max(0, Math.min(1, (pos + (e.key === "ArrowRight" ? 5 : -5)) / dur))); } });
+    window.addEventListener("pagehide", stop);
+    return { load, stop, pause };
+  })();
+})();
+</script>
+</body>
+</html>

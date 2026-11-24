@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Gallery Guide · Jana Yan</title>
+<meta name="description" content="Gallery Guide case study: a phone guide for the WashU Sam Fox School Gallery, from interviews and surveys to a clickable prototype.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Lato:ital,wght@0,400;0,700;1,400&family=Syne+Mono&display=swap">
+<link rel="stylesheet" href="../case.css">
+</head>
+<body>
+<!-- Gallery Guide case study. Shared layout: ../case.css. Clickable prototype: prototype/index.html -->
+
+<header class="top" id="top">
+  <div class="wrap">
+    <a class="brand" href="../">Jana Yan</a>
+    <nav class="nav" aria-label="Sections"><a href="../#works">Works</a><a href="../#about">About</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+<div class="col">
+
+  <!-- ===== hero ===== -->
+  <section class="hero" aria-labelledby="t">
+    <h1 id="t">Gallery Guide lets visitors point their phone at an artwork to hear about it, meet the artist and see how it was made</h1>
+    <figure class="panel" style="margin-bottom:0">
+      <img src="hero.jpg" width="2000" height="1125" alt="Three Gallery Guide screens: the WashU Sam Fox Gallery home page with the current exhibition, the camera finding a sculpture, and the artwork page with its description and audio player">
+    </figure>
+    <div class="meta">
+      <div><h2>Role</h2><ul><li>UX researcher</li><li>Product designer</li><li>Team of two, with Gioia Wang</li></ul></div>
+      <div><h2>Scope</h2><ul><li>Secondary research</li><li>Interviews &amp; surveys</li><li>Ideation</li><li>Prototyping</li><li>User testing</li></ul></div>
+      <div><h2>Tools</h2><ul><li>Figma</li><li>Google Forms</li></ul></div>
+      <div><h2>Year</h2><ul><li>2026</li><li>8 weeks</li></ul><a class="live" href="#try">Try the prototype ↓</a></div>
+    </div>
+  </section>
+
+  <!-- ===== problem / solution ===== -->
+  <section class="sec two" aria-label="Problem and solution">
+    <div>
+      <span class="k"><b>01</b>Problem</span>
+      <p class="lead">A new campus gallery with strong shows, but very little information around the work, in the room or online.</p>
+      <ul class="dots">
+        <li>10 of 11 visitors we surveyed expected more wall labels</li>
+        <li>The gallery prefers minimal wall text; extra details sit in printed binders that are hard to navigate</li>
+        <li>It has no website of its own, so shows aren’t archived and individual works aren’t documented</li>
+      </ul>
+    </div>
+    <div>
+      <span class="k"><b>02</b>Solution</span>
+      <p class="lead">A guide on your phone that adds context you can opt into, without putting more text on the walls.</p>
+      <p>Point the camera at a work to find it, listen to a short description, then go deeper into the artist and the process. Past exhibitions live in the same place, so the gallery finally has an archive.</p>
+    </div>
+  </section>
+
+  <!-- ===== context ===== -->
+  <section class="sec" aria-labelledby="c-h">
+    <span class="k"><b>03</b>Context</span>
+    <h2 id="c-h">The WashU Sam Fox School Gallery</h2>
+    <p>The gallery opened in 2025 on the Delmar Loop, less than a mile from campus, replacing the Des Lee Gallery downtown. It shows student work (junior, senior and MFA exhibitions), faculty work and widely known contemporary artists, for an audience of students, faculty, families, art enthusiasts, St. Louis locals and people walking by on Delmar.</p>
+    <div class="panel pad stats">
+      <div><b>2025</b><span>opened on the Delmar Loop</span></div>
+      <div><b>2,950</b><span>square feet, in two exhibition spaces</span></div>
+      <div><b>4–5</b><span>exhibitions each semester, each up for a short time</span></div>
+      <div><b>0</b><span>websites of its own, just a page on the school site</span></div>
+    </div>
+    <p class="cap">We started from two questions: how could the gallery give visitors a better way to engage with the shows, and how could it help artists show their work to a wider audience?</p>
+  </section>
+
+  <!-- ===== interview ===== -->
+  <section class="sec split" aria-labelledby="i-h">
+    <div>
+      <span class="k"><b>04</b>Interview</span>
+      <h3 id="i-h">Strong space, thin digital layer</h3>
+      <p>We interviewed the gallery manager. The gallery’s first job is educational: giving students a real exhibition experience and exposure to professional practice. It is also Sam Fox’s public face on Delmar, with more walk-in visitors than the old location.</p>
+      <p>The physical space and the curation are strong. The digital and interactive side lags behind, with little budget or technology to support it.</p>
+    </div>
+    <div class="panel pad">
+      <ol class="flow" aria-label="Pain points from the interview">
+        <li style="--c:var(--t-pink)"><b>Poor documentation &amp; archiving</b>Limited photography budget, no record of individual works, and Instagram holds only a partial record</li>
+        <li style="--c:var(--t-blue)"><b>Weak digital experience</b>No dedicated website; the school page is run by the marketing team, so it can’t archive shows or feature single works</li>
+        <li style="--c:var(--t-yellow)"><b>Information access is frictional</b>Minimal wall text is often preferred, so details go into printed binders and sheets that are hard to navigate</li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ===== surveys ===== -->
+  <section class="sec" aria-labelledby="s-h">
+    <span class="k"><b>05</b>Surveys</span>
+    <h2 id="s-h">Visitors could find the work. They wanted the story behind it.</h2>
+    <p>We surveyed 11 gallery visitors and 9 student artists who had shown work there. Most visitors found the space easy to get around: 9 of 11 rated navigation 1 or 2 out of 5, where 1 is easy. What they missed was context.</p>
+
+    <div class="panel pad charts">
+      <div class="chart">
+        <h3>Did you understand the artworks as much as you wished?</h3>
+        <div class="n">11 responses · 1 = as much as I wished</div>
+        <div class="cols" role="img" aria-label="Ratings: 1, one person; 2, none; 3, five people; 4, five people; 5, none">
+          <div title="1: 1 person">1<span style="--v:20%"></span></div>
+          <div title="2: 0 people">0<span style="--v:0%"></span></div>
+          <div title="3: 5 people">5<span style="--v:100%"></span></div>
+          <div title="4: 5 people">5<span style="--v:100%"></span></div>
+          <div title="5: 0 people">0<span style="--v:0%"></span></div>
+        </div>
+        <div class="axis"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span></div>
+        <div class="axis-note"><span>understood</span><span>wish I knew more</span></div>
+      </div>
+      <div class="chart">
+        <h3>Which describes your visit?</h3>
+        <div class="n">11 responses · could pick several</div>
+        <ul class="bars">
+          <li title="10 of 11">Expected more wall labels <b>10</b><span class="track"><span class="fill" style="--v:91%"></span></span></li>
+          <li title="4 of 11">Expected a clearer map <b>4</b><span class="track"><span class="fill" style="--v:36%"></span></span></li>
+          <li title="2 of 11">Hard to find spaces or restroom <b>2</b><span class="track"><span class="fill" style="--v:18%"></span></span></li>
+          <li title="1 of 11">Navigation was clear enough <b>1</b><span class="track"><span class="fill" style="--v:9%"></span></span></li>
+        </ul>
+      </div>
+      <div class="chart">
+        <h3>What did you wish you knew more about?</h3>
+        <div class="n">11 responses · could pick several</div>
+        <ul class="bars">
+          <li title="9 of 11">The artworks <b>9</b><span class="track"><span class="fill" style="--v:82%"></span></span></li>
+          <li title="7 of 11">The artists <b>7</b><span class="track"><span class="fill" style="--v:64%"></span></span></li>
+          <li title="5 of 11">The materials <b>5</b><span class="track"><span class="fill" style="--v:45%"></span></span></li>
+          <li title="0 of 11">There was enough information <b>0</b><span class="track"><span class="fill" style="--v:0%"></span></span></li>
+        </ul>
+      </div>
+    </div>
+
+    <h3 style="margin-top:56px">From the artists</h3>
+    <div class="panel pad grid3" style="margin-top:20px">
+      <div class="pr"><span class="big">9 of 9</span><p>said professional documentation of their work would help, most of all for portfolios</p></div>
+      <div class="pr"><span class="big">7 of 9</span><p>are comfortable with others photographing and posting their work, as long as they’re told first</p></div>
+      <div class="pr"><span class="big">8 of 9</span><p>want the public to know more about their work and practice beyond the show</p></div>
+    </div>
+    <p class="cap">The tension: the gallery wants quiet walls, and visitors want more context. A phone can hold that context without touching the walls.</p>
+  </section>
+
+  <!-- ===== personas ===== -->
+  <section class="sec" aria-labelledby="pe-h">
+    <span class="k"><b>06</b>Who it’s for</span>
+    <h2 id="pe-h">Three kinds of people in the room</h2>
+    <div class="panel pad grid3">
+      <div class="idea" style="--c:var(--t-pink)"><span class="sw"></span><div><h3>Student artist</h3><p>Wants exposure and professional experience, needs documentation for a portfolio, and is still learning how exhibitions work.</p></div></div>
+      <div class="idea" style="--c:var(--t-blue)"><span class="sw"></span><div><h3>Casual visitor</h3><p>Curious but not deeply informed, often walking in off Delmar. Needs guidance and context, with a short attention span.</p></div></div>
+      <div class="idea" style="--c:var(--t-green)"><span class="sw"></span><div><h3>Art enthusiast</h3><p>Wants deeper meaning and context, and is interested in process and concepts.</p></div></div>
+    </div>
+    <p class="cap">The opportunity we chose: an accessible layer of interpretation that adds context without disrupting the gallery’s look, and that people can choose to use.</p>
+  </section>
+
+  <!-- ===== ideation ===== -->
+  <section class="sec" aria-labelledby="id-h">
+    <span class="k"><b>07</b>Ideation</span>
+    <h2 id="id-h">From a sketch map to three directions</h2>
+    <p>We sketched ideas from feedback walls and guest journals to AR glasses, a viewing robot and floor text, and mapped them from user input to user output, and from public to private.</p>
+    <figure class="panel pad"><img src="ideation.jpg" width="1800" height="1032" loading="lazy" alt="Ideation map: hand-drawn sketches such as a living archive website, signage on the ceiling, audio guide, AR glasses, dynamic map, viewing robot and guest journal, placed on axes from user input to user output and public to private" class="framed"></figure>
+    <div class="panel pad grid3">
+      <div class="idea" style="--c:var(--t-yellow)"><span class="sw"></span><div><h3>Archive website</h3><p>An online record of each show, with photos, video or a virtual gallery. Artists are told before anything is posted.</p><span class="tagk on">kept: past exhibitions</span></div></div>
+      <div class="idea" style="--c:var(--t-blue)"><span class="sw"></span><div><h3>Navigation &amp; information</h3><p>A booklet or projected wall text that connects each work to its artist, description and material.</p><span class="tagk on">kept: artwork pages</span></div></div>
+      <div class="idea" style="--c:var(--t-pink)"><span class="sw"></span><div><h3>Audio</h3><p>Audio appears on your phone when you get close to a work, and you decide how much you hear, brief or detailed.</p><span class="tagk on">kept: the core</span></div></div>
+    </div>
+    <p class="cap">The final idea combined all three: scan an artwork with the camera to get its audio, a short “about the work” and the artist’s intro, with the artist statement, website and process one tap away.</p>
+  </section>
+
+  <!-- ===== prototype ===== -->
+  <section class="sec" aria-labelledby="pr-h">
+    <span class="k"><b>08</b>Prototype</span>
+    <h2 id="pr-h">Scan, listen, go deeper</h2>
+    <p>We built the flow in Figma around two of my own pieces from the junior show, so every screen had real content.</p>
+    <ul class="dots">
+      <li><strong>Camera scan:</strong> point at a work and the app recognizes it</li>
+      <li><strong>The work:</strong> title, a short description and a playable “about the work” audio</li>
+      <li><strong>The artist:</strong> statement, personal website and ways to get in touch</li>
+      <li><strong>The process:</strong> progress photos with short notes</li>
+      <li><strong>Home:</strong> the current exhibition with its artworks and artists, plus past exhibitions</li>
+    </ul>
+    <figure class="panel pad"><img src="flow.jpg" width="1800" height="1679" loading="lazy" alt="Figma prototype flow connecting the home page, two scan pages, artwork pages, artist pages, the exhibition's artwork and artist lists, and a past exhibition page" class="framed"></figure>
+  </section>
+
+  <!-- ===== testing ===== -->
+  <section class="sec" aria-labelledby="ut-h">
+    <span class="k"><b>09</b>User testing</span>
+    <h2 id="ut-h">What testing changed</h2>
+    <p>Testers got lost moving between pages. It wasn’t clear which text was a button or where it led, or whether the page title doubled as a home or back button. The artwork archive was hard to find. Testers also asked for ways to comment, to contact the artist and to see past exhibitions.</p>
+    <div class="panel pad shots n3">
+      <figure><img src="test-back-before.jpg" width="700" height="1528" loading="lazy" alt="Before: the scan page with only the gallery title at the top"><figcaption>Before: the gallery title was the only way back.</figcaption></figure>
+      <figure><img src="test-back-after.jpg" width="700" height="1524" loading="lazy" alt="After: the same scan page with a back arrow next to the gallery title, circled"><figcaption>After: a back arrow on every page.</figcaption></figure>
+      <figure><img src="test-arrow.jpg" width="700" height="1528" loading="lazy" alt="Home page with an arrow button circled next to the current exhibition title"><figcaption>An arrow next to the exhibition opens its artworks and artists.</figcaption></figure>
+    </div>
+    <p class="cap">Testing also added comments on each artwork, contact links on the artist page and a past exhibitions section on home.</p>
+  </section>
+
+  <!-- ===== try it ===== -->
+  <section class="sec split try" id="try" aria-labelledby="try-h">
+    <div>
+      <span class="k"><b>10</b>Try it</span>
+      <h3 id="try-h">Click through the prototype</h3>
+      <p>I rebuilt the final design as a working web prototype. The camera is simulated with photos from the show, and two artworks have full pages.</p>
+      <ol class="flow" style="margin-top:22px">
+        <li style="--c:var(--t-blue)"><b>Find Artwork</b>The camera finds the sculpture in front of you. Tap its name.</li>
+        <li style="--c:var(--t-yellow)"><b>Listen</b>Press play under “About the work” to hear the description read aloud.</li>
+        <li style="--c:var(--t-pink)"><b>Go deeper</b>Switch to the artist and the process tabs.</li>
+        <li style="--c:var(--t-green)"><b>Join in</b>Leave a comment, or tap the shutter to scan the next artwork.</li>
+      </ol>
+      <a class="live" href="prototype/" target="_blank" rel="noopener" style="margin-top:22px">Open full screen ↗</a>
+    </div>
+    <div class="device">
+      <iframe src="prototype/?embed=1" title="Gallery Guide clickable prototype" loading="lazy"></iframe>
+    </div>
+  </section>
+
+  <!-- ===== timeline ===== -->
+  <section class="sec" aria-labelledby="tl-h">
+    <span class="k"><b>11</b>Timeline</span>
+    <h2 id="tl-h">Eight weeks, March to April</h2>
+    <div class="panel pad">
+      <ol class="gantt" aria-label="Project timeline">
+        <li style="--s:0;--e:14"><span>Secondary research</span><em>Mar 2–16</em></li>
+        <li style="--s:14;--e:21"><span>Rough research question</span><em>Mar 16–23</em></li>
+        <li style="--s:14;--e:23"><span>Interviews &amp; surveys</span><em>Mar 16–25</em></li>
+        <li style="--s:21;--e:28"><span>Research synthesis</span><em>Mar 23–30</em></li>
+        <li style="--s:23;--e:30"><span>Ideation, user journey, persona</span><em>Mar 25–Apr 1</em></li>
+        <li style="--s:28;--e:37"><span>Final solution &amp; prototyping</span><em>Mar 30–Apr 8</em></li>
+        <li style="--s:35;--e:49"><span>User testing, final product</span><em>Apr 6–20</em></li>
+        <li style="--s:42;--e:57"><span>Final presentation</span><em>Apr 13–28</em></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="end" aria-label="Try the prototype">
+    <h2>Walk through the gallery from here</h2>
+    <p>This page is a snapshot of the process. I’m happy to share the full research.</p>
+    <a class="btn" href="prototype/" target="_blank" rel="noopener">Open the prototype <span aria-hidden="true">↗</span></a>
+    <a class="btn ghost" href="mailto:yanjana002@gmail.com">Email me</a>
+  </section>
+
+  <a class="back" href="../#works">← all works</a>
+
+</div>
+</main>
+
+<footer>
+  <div class="wrap"><span>© 2026 Jana Yan</span><a href="#top">back to top ↑</a></div>
+</footer>
+
+</body>
+</html>
